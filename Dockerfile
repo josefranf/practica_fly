@@ -20,7 +20,7 @@ COPY src/index.php /var/www/html/index.php
 COPY sql/init.sql /sql/init.sql
 
 #permisos
-RUN chmod  -R www-data:www-data /var/www/html
+RUN chown -R www-data:www-data /var/www/html
 
 #entrypoint que inicializa la BD  y luego arranca Apache
 RUN printf '%s\n' \
