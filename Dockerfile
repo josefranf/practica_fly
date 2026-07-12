@@ -34,6 +34,6 @@ RUN printf '%s\n' \
 > /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# Expone el puerto 80
-EXPOSE 80
+# Expone el puerto 8080
+EXPOSE 8080
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
