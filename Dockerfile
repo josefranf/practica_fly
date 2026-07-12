@@ -32,7 +32,7 @@ RUN printf '%s\n' \
 '' \
 'exec apache2-foreground' \
 > /usr/local/bin/docker-entrypoint.sh
-RUN chmod +x /usr/local/bind/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Expone el puerto 80
 EXPOSE 80
