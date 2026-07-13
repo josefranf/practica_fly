@@ -24,6 +24,8 @@ RUN printf '%s\n' \
 'set -e' \
 '' \
 'if [ -n "$DATABASE_URL" ] && [ -f /sql/init.sql ];  then' \
+'echo "inicializando base de datos ..."' \
+'psql "$DATABASE_URL" -f  /sql/init.sql || true' \
 'fi' \
 '' \
 'exec apache2-foreground' \
