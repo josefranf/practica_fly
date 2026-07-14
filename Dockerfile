@@ -16,8 +16,6 @@ RUN a2enmod rewrite
 # Copia index.php
 COPY src/index.php /var/www/html/index.php
 
-#copiar init.sql
-COPY sql/init.sql /sql/init.sql
 
 #permisos
 RUN chown  -R www-data:www-data /var/www/html
