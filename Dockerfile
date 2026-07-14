@@ -1,25 +1,14 @@
 FROM php:8.3-apache
 
-#1.  Instala la extensión PDO para PostgreSQL
-RUN apt-get update && apt-get install -y libpq-dev \
-    && docker-php-ext-install pdo pdo_pgsql pgsql \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-# apache en puerto 8080 y 80 (fly.io)
-RUN sed -i 's/Listen 80/Listen 8080/' \
-    /etc/apache2/ports.conf \
-    /etc/apache2/sites-available/000-default.conf
+RUN apt-get update && \
+    apt-get install -y libpq-dev && \
+    docker-php-ext-install pdo pdo_pgsql pgsql && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-#habilitar mod_rewrite
 RUN a2enmod rewrite
 
+COPY src/ /var/www/html/
 
-# Copia index.php
-COPY src/index.php /var/www/html/index.php
+RUN chown -R www-data:www-data /var/www/html
 
-
-#permisos
-RUN chown  -R www-data:www-data /var/www/html
-
-
-# Expone el puerto 80
 EXPOSE 80
