@@ -20,20 +20,8 @@ COPY src/index.php /var/www/html/index.php
 COPY sql/init.sql /sql/init.sql
 
 #permisos
-RUN chmod  -R www-data:www-data /var/www/html
+RUN chown  -R www-data:www-data /var/www/html
 
-#entrypoint que inicializa la BD  y luego arranca Apache
-RUN printf '%s\n' \
-'#!/bin/bash' \
-'set -e' \
-'' \
-'if [ -n "$DATABASE_URL" ] && [ -f /sql/init.sql ];  then' \
-'fi' \
-'' \
-'exec apache2-foreground' \
-> /usr/local/bin/docker-entrypoint.sh
-RUN chmod +x /usr/local/bind/docker-entrypoint.sh
 
 # Expone el puerto 80
 EXPOSE 80
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
